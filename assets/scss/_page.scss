@@ -1,0 +1,44 @@
+main.page {
+    &.light-theme {
+        background: url('/images/bg-desktop-light.jpg') center top no-repeat $very_light_gray;
+    }
+    &.dark-theme {
+        background: url('/images/bg-desktop-dark.jpg') center top no-repeat $very_dark_blue;
+    }
+
+    section.new-todo {
+        background: white;
+        border-radius: 5px;
+        margin-bottom: 30px;
+        div.mark {
+            background: transparent;
+            width: 13%;
+            label {
+                background: transparent;
+                border: 1px solid $very_light_grayish_blue;
+                border-radius: 100px;
+                display: block;
+                height: 24px;
+                margin: 18px 20px 18px 20px;
+                width: 24px;
+            }
+        }
+        div.label {
+            width: 87%;
+            input {
+                background-color: white;
+                border: 0 none;
+                border-radius: 10px;
+                color: $very_dark_grayish_blue_hover;
+                font: $regular 19px $font;
+                height: 100%;
+                padding: 18px 15px 15px 0;
+                width: 100%;
+                &:focus {
+                    box-shadow: none;
+                    outline: none;
+                }
+            }
+        }
+    }
+}
