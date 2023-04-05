@@ -2,6 +2,12 @@
     max-width: 564px;
 }
 
+.border-gradient {
+    border: 1px solid;
+    border-image-slice: 1;
+    border-width: 1px;
+}
+
 @media screen and (max-width: $mobile) {
     .container-app {
         max-width: 345px;
