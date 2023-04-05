@@ -95,6 +95,8 @@ Now I'm gonna focus on JavaScript to make this project better and create new and
 ### Useful resources
 
 - [Bootstrap](https://getbootstrap.com/) - Bootstrap 5.2.3 - Used to create the CSS Grids and to use the preformatated CSS classes in the project instead of rebuild all the CSS Elements.
+- [Border_Color](https://css-tricks.com/gradient-borders-in-css/) - Gradient Borders in CSS - This helped me to customize the input borders with gradient colors.
+- [Custom_Checkboxes](https://moderncss.dev/pure-css-custom-checkbox-style/) - Customize checkbox - This helped me to customize the checkbox of the list according to the design.
 - [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) - Flexbox - Used to size and position the elements.
 
 ## Author
