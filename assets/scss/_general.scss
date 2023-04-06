@@ -2,10 +2,8 @@
     max-width: 564px;
 }
 
-.border-gradient {
-    border: 1px solid;
-    border-image-slice: 1;
-    border-width: 1px;
+button {
+    cursor: pointer;
 }
 
 @media screen and (max-width: $mobile) {
