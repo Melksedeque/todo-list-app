@@ -52,6 +52,9 @@ main.page {
     }
 
     section.list-todo {
+        p.error-info {
+            font: $regular 12px $font;
+        }
         ul.list-items {
             background: white;
             border-radius: 7px 7px 0 0;
@@ -67,32 +70,36 @@ main.page {
                 justify-content: flex-start;
                 flex: 1 1 100%;
                 button.complete {
-                    background: $gradient;
+                    background: $very_light_grayish_blue_tlight;
                     border: 0 none;
                     border-radius: 100px;
                     cursor: pointer;
-                    height: 25px;
+                    height: 26px;
                     margin: 0 20px;
                     overflow: hidden;
                     padding: 0;
                     position: relative;
-                    width: 25px;
+                    transition: all .25s ease;
+                    width: 26px;
                     svg {
                         background: white;
                         border-radius: 200px;
                         color: white;
-                        height: 23px;
+                        height: 24px;
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);
-                        width: 23px;
+                        transition: all .25s ease;
+                        width: 24px;
                         path {
-                            transform: translate(27%, 35%);
+                            opacity: 0;
+                            transform: translate(30%, 35%);
+                            transition: all .25s ease;
                         }
                     }
                     &:hover {
-
+                        background: $gradient;
                     }
                 }
                 span.title {
@@ -112,8 +119,6 @@ main.page {
                     transition: all .25s ease;
                 }
                 &:hover {
-                    label {}
-                    input {}
                     button.delete {
                         opacity: 1;
                     }
@@ -125,6 +130,9 @@ main.page {
                             background: $gradient;
                             height: 100%;
                             width: 100%;
+                            path {
+                                opacity: 1;
+                            }
                         }
                     }
                     span.title {
@@ -195,11 +203,32 @@ main.page {
                 background: $very_dark_desaturated_blue_tdark;
                 li.item {
                     border-color: $very_dark_grayish_blue_hover_tdark;
+                    button.complete {
+                        background: $very_dark_grayish_blue_hover_tdark;
+                        svg {
+                            background: $very_dark_desaturated_blue_tdark;
+                            path {
+                                opacity: 0;
+                            }
+                        }
+                        &:hover {
+                            background: $gradient;
+                        }
+                    }
                     span.title {
                         color: $light_grayish_blue_tdark;
                     }
 
                     &.completed {
+                        button.complete {
+                            background: $gradient;
+                            svg {
+                                background: transparent;
+                                path {
+                                    opacity: 1;
+                                }
+                            }
+                        }
                         span.title {
                             color: $very_dark_grayish_blue_dark_tdark;
                         }
