@@ -27,6 +27,7 @@ const addNewToDo = () => {
         toDoInput.value = '';
         errorInfo.textContent = '';
     } else {
+        errorInfo.classList.toggle('alert-danger');
         errorInfo.textContent = 'Você não pode adicionar um item vazio!';
     }
 }
