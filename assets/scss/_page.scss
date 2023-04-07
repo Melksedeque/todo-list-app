@@ -245,6 +245,9 @@ main.page {
                     &:hover {
                         color: $light_grayish_blue_hover_tdark;
                     }
+                    &.active {
+                        color: $bright_blue;
+                    }
                 }
             }
         }
