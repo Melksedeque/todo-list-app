@@ -272,10 +272,10 @@ main.page {
 @media screen and (max-width: $mobile) {
     main.page {
         &.light-theme {
-            background: url('/images/bg-mobile-light.jpg') center top no-repeat $very_light_gray_tlight;
+            background: url('../../images/bg-mobile-light.jpg') center top no-repeat $very_light_gray_tlight;
         }
         &.dark-theme {
-            background: url('/images/bg-mobile-dark.jpg') center top no-repeat $very_dark_blue_tdark;
+            background: url('../../images/bg-mobile-dark.jpg') center top no-repeat $very_dark_blue_tdark;
         }
 
         section.new-todo {
