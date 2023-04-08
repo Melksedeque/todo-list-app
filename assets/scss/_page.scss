@@ -1,10 +1,10 @@
 main.page {
     transition: all .25s ease;
     &.light-theme {
-        background: url('/images/bg-desktop-light.jpg') center top no-repeat $very_light_gray_tlight;
+        background: url('../../images/bg-desktop-light.jpg') center top no-repeat $very_light_gray_tlight;
     }
     &.dark-theme {
-        background: url('/images/bg-desktop-dark.jpg') center top no-repeat $very_dark_blue_tdark;
+        background: url('../../images/bg-desktop-dark.jpg') center top no-repeat $very_dark_blue_tdark;
     }
 
     section.new-todo {
@@ -57,19 +57,23 @@ main.page {
             margin: -30px 0 60px;
         }
         ul.list-items {
-            background: white;
+            background: $very_light_grayish_blue_tlight;
             border-radius: 7px 7px 0 0;
             display: flex;
             flex-flow: column nowrap;
+            overflow: hidden;
             transition: all .25s ease;
             li.item {
                 align-content: center;
                 align-items: center;
+                background: white;
                 border-bottom: 1px solid $very_light_grayish_blue_tlight;
                 display: flex;
                 line-height: 60px;
                 justify-content: flex-start;
                 flex: 1 1 100%;
+                transition: all .25s ease;
+                z-index: 10;
                 button.complete {
                     background: $very_light_grayish_blue_tlight;
                     border: 0 none;
@@ -141,6 +145,10 @@ main.page {
                         text-decoration: line-through;
                     }
                 }
+
+                &.active {
+                    margin-bottom: 20px;
+                }
             }
         }
         footer.list-filter {
@@ -201,8 +209,9 @@ main.page {
         
         section.list-todo {
             ul.list-items {
-                background: $very_dark_desaturated_blue_tdark;
+                background: $very_dark_grayish_blue_hover_tdark;
                 li.item {
+                    background: $very_dark_desaturated_blue_tdark;
                     border-color: $very_dark_grayish_blue_hover_tdark;
                     button.complete {
                         background: $very_dark_grayish_blue_hover_tdark;
