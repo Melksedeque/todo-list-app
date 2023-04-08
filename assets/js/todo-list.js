@@ -28,6 +28,8 @@ $(function(){
 
     // Delete all completed tasks
     $('button.clear-items').on('click', function() {
-        $('main.page').find('li.completed').fadeOut('fast');
+        $('main.page').find('li.completed').fadeOut('fast', function() {
+            $(this).remove();
+        });
     });
 })
