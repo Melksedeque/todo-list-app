@@ -1,9 +1,18 @@
-<<<<<<< HEAD
 $(function(){
     // Create list item
     $('input#input_new_todo').on('keyup', function (e) {
         if (e.key === 'Enter' || e.keyCode === 13) {
-            alert('Melk');
+            if(!$(this).val()) {
+                $('main.page').find('div.error-info').fadeIn('fast');
+            }
+            else {
+                $('main.page').find('div.error-info').fadeOut('fast');
+                $('main.page section.list-todo').find('ul.list-items')
+                    .append(
+                        '<li class="item"><button class="complete"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="9"><path transform="translate(0, -15.674)" fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg></button><span class="title">' + $(this).val() + '</span><button class="delete"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg></button></li>'
+                    );
+            }
+            e.currentTarget.value = "";
         }
     });
 
@@ -22,75 +31,3 @@ $(function(){
         $('main.page').find('li.completed').fadeOut('fast');
     });
 })
-=======
-$(function() {
-    const main = () => {
-        prepareDOMElements();
-        prepareDOMEvents();
-    }
-    
-    const prepareDOMElements = () => {
-        toDoInput = document.querySelector('input[name="input_new_todo"]');
-        errorInfo = document.querySelector('p.error-info');
-        ulList = document.querySelector('section.list-todo ul.list-items');
-    }
-    
-    const prepareDOMEvents = () => {
-        toDoInput.addEventListener('keyup', enterKeyCheck);
-        ulList.addEventListener('click', checkClick);
-    }
-    
-    const addNewToDo = () => {
-        if (toDoInput.value != ''){
-            newToDo = document.createElement('li');
-            newToDo.textContent = toDoInput.value;
-            //dodajmey do naszego ToDo toolsy (przyciski)
-            // createToolAreal();
-            //dodajemy naszego ToDo do ul listy
-            ulList.append(newToDo);
-            
-            //czyscimy error jak i input po dodaniu ToDo
-            toDoInput.value = '';
-            errorInfo.textContent = '';
-        } else {
-            errorInfo.addClass('alert alert-danger');
-            errorInfo.textContent = 'Você não pode adicionar um item vazio!';
-        }
-    }
-    
-    //wykonujemy też dodanie todo na enterze
-    const enterKeyCheck = (e) => {
-        if(e.key == 'Enter'){
-            addNewToDo();
-        }
-    }
-    
-    //funkcjs sprawdzająca w co klikamy (aby wiedziec czy zakonczyc task czy moze go usunac czy edytowac)
-    const checkClick = (e) => {
-        if(e.target.matches('.complete')){
-            e.target.closest('li').classList.toggle('completed'); //po nacisnieciu complete do najblizszego elementu li (dziadka) dodajemy klase completed
-            e.target.classList.toggle('completed');
-    
-        } else if (e.target.matches('.delete')) { //else if poniewaz gdybysmy klikneli wszedzie poza delete tez by sie wykonal warunek
-            deleteToDo(e);
-        }
-    }
-    
-    const deleteToDo = (e) => {
-        e.target.closest('li').remove();
-    
-        const allToDos = ulList.querySelectorAll('li');
-        if (allToDos.length == 0) {
-            errorInfo.textContent = 'Brak zadań na liście.'
-        }
-    }
-    
-    document.addEventListener('DOMContentLoaded', main);
-});
-
-
-
-
-
-
->>>>>>> 0f40748950a17ae1d1b5c4db38648293ca463998
