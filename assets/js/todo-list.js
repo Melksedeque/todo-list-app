@@ -1,4 +1,12 @@
-$(function(){
+$(function() {
+    // Count active items
+    function countItems() {
+        let items = $('main.page section.list-todo ul.list-items li.item').not('.completed').length;
+        $('span.count').text(items);
+    }
+
+    countItems();
+
     // Create list item
     $('input#input_new_todo').on('keyup', function (e) {
         if (e.key === 'Enter' || e.keyCode === 13) {
@@ -14,17 +22,20 @@ $(function(){
             }
             e.currentTarget.value = "";
         }
+        countItems();
     });
 
     // Complete task
     $('button.complete').on('click', function() {
         $(this).closest('li').addClass('completed');
+        countItems();
     });
 
     // Delete list item
     $('button.delete').on('click', function() {
         $(this).closest('li').fadeOut('fast', function() {
             $(this).remove();
+            countItems();
         });
     });
 
