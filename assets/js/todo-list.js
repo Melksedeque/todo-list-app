@@ -23,7 +23,9 @@ $(function(){
 
     // Delete list item
     $('button.delete').on('click', function() {
-        $(this).closest('li').fadeOut('fast');
+        $(this).closest('li').fadeOut('fast', function() {
+            $(this).remove();
+        });
     });
 
     // Delete all completed tasks
