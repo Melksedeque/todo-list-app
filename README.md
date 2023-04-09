@@ -16,8 +16,6 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 ### The challenge
@@ -36,20 +34,15 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./todo-app-light-desktop.png)
+![](./todo-app-light-mobile.png)
+![](./todo-app-dark-desktop.png)
+![](./todo-app-dark-mobile.png)
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Add live site URL here](https://melksedeque.github.io/todo-list-app/)
 
 ## My process
 
@@ -66,27 +59,30 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+With this project, I learned how to use the draggable attribute in HTML and JavaScript to reorder the task list. It was so simple to learn that I was surprised to see it working from the start.
 
-To see how you can add code snippets, see below:
+The block of code below is what gave me headaches and frankly, I'm still stucked with no idea on how to solve it.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
 ```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
+$('input#input_new_todo').on('keyup', function (e) {
+  if (e.key === 'Enter' || e.keyCode === 13) {
+    if(!$(this).val()) {
+      $('main.page').find('div.error-info').fadeIn('fast');
+    }
+    else {
+      $('main.page').find('div.error-info').fadeOut('fast');
+      $('main.page section.list-todo').find('ul.list-items')
+        .append(
+          '<li class="item"><button class="complete"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="9"><path transform="translate(0, -15.674)" fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg></button><span class="title">' + $(this).val() + '</span><button class="delete"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg></button></li>'
+        );
+    }
+    e.currentTarget.value = "";
+  }
+  countItems();
+});
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+This part should create a new item in the task list. And it does it. But the item created is not interactive. The delete task button nor the complete task button works. If anyone has any idea on how to solve it, or how to make it in a better way, please, feel free to create an issue to help me out.
 
 ### Continued development
 
@@ -95,8 +91,6 @@ Now I'm gonna focus on JavaScript to make this project better and create new and
 ### Useful resources
 
 - [Bootstrap](https://getbootstrap.com/) - Bootstrap 5.2.3 - Used to create the CSS Grids and to use the preformatated CSS classes in the project instead of rebuild all the CSS Elements.
-- [Border_Color](https://css-tricks.com/gradient-borders-in-css/) - Gradient Borders in CSS - This helped me to customize the input borders with gradient colors.
-- [Custom_Checkboxes](https://moderncss.dev/pure-css-custom-checkbox-style/) - Customize checkbox - This helped me to customize the checkbox of the list according to the design.
 - [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) - Flexbox - Used to size and position the elements.
 
 ## Author
