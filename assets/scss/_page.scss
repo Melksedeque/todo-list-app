@@ -268,7 +268,6 @@ main.page {
     }
 }
 
-
 @media screen and (max-width: $mobile) {
     main.page {
         &.light-theme {
@@ -305,6 +304,8 @@ main.page {
                         margin: 0 15px 0 20px;
                         width: 20px;
                         svg {
+                            height: 18px;
+                            width: 18px;
                             path {
                                 transform: translate(25%, 30%);
                             }
@@ -328,7 +329,6 @@ main.page {
                 }
             }
         }
-
 
         section.filter-mobile {
             background: white;
