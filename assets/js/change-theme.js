@@ -1,17 +1,14 @@
-const page = $('main.page');
-const light_theme = $('button.button-light');
-const dark_theme = $('button.button-dark');
+const page = document.querySelector('main.page');
+const btnTheme = document.querySelectorAll('button.button-theme');
 
-light_theme.on('click', function(){
-    $(this).fadeOut(100, function(){
-        dark_theme.fadeIn(100);
+btnTheme.forEach((button) => {
+  button.addEventListener('click', () => {
+    page.classList.toggle('light-theme');
+    page.classList.toggle('dark-theme');
+    button.classList.toggle('button-light');
+    button.classList.toggle('button-dark');
+    btnTheme.forEach((btn) => {
+      btn.style.display = btn.style.display === 'none' ? 'inline-block' : 'none';
     });
-    page.removeClass('light-theme').addClass('dark-theme');
-});
-
-dark_theme.on('click', function(){
-    $(this).fadeOut(100, function(){
-        light_theme.fadeIn(100);
-    });
-    page.removeClass('dark-theme').addClass('light-theme');
+  });
 });
