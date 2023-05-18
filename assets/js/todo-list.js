@@ -44,7 +44,7 @@ function createTodo(title) {
     taskList.appendChild(newTodo)
 
     localStorage.setItem("task", title)
-  }
+}
   
 
 
