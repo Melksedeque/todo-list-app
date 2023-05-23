@@ -24,7 +24,7 @@ function buildDeleteTaskButton(id) {
     return btnDeleteTask
 }
 
-function buildCompleteTaskButton() {
+function buildCompleteTaskButton(id) {
     const btnCompleteTask = document.createElement('button')
     const svgCompleteTask = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
 
@@ -36,7 +36,7 @@ function buildCompleteTaskButton() {
     btnCompleteTask.appendChild(svgCompleteTask)
 
     btnCompleteTask.addEventListener("click", function() {
-        completeTodo(this.parentNode)
+        completeTodo(this.parentNode, id)
     })
 
     return btnCompleteTask
@@ -54,7 +54,8 @@ form.addEventListener("submit", (e) => {
     const lastItemId = items.length > 0 ? items[items.length - 1].id : 0
     const newItem = {
         "id": lastItemId !== 0 ? lastItemId + 1 : 1,
-        "title": inputNewTodo.value
+        "title": inputNewTodo.value,
+        "status": ""
     }
 
     console.log(newItem)
@@ -76,7 +77,7 @@ function createTodo(task) {
     
     newTodo.classList.add('item')
     newTodo.dataset.id = task.id
-    newTodo.dataset.status = ""
+    newTodo.dataset.status = task.status
     
     taskTitle.classList.add('title')
     taskTitle.innerHTML += task.title
@@ -91,17 +92,25 @@ function createTodo(task) {
 function deleteTodo(task, id) {
     task.remove()
     items.splice(items.findIndex(element => element.id === id), 1)
+    console.log(id)
     localStorage.setItem("tasks", JSON.stringify(items))
     countItems()
 }
 
-function completeTodo(task) {
-    const status = task.dataset.status
+function completeTodo(task, id) {
+    const status = task.dataset.status;
 
-    task.classList.toggle("completed")
-    task.dataset.status = status === "completed" ? "" : "completed"
+    task.classList.toggle("completed");
+    task.dataset.status = status === "completed" ? "" : "completed";
 
-    countItems()
+    items.forEach(item => {
+        if (item.id === id) {
+            item.status = task.dataset.status;
+        }
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(items));
+    countItems();
 }
 
 
@@ -125,9 +134,9 @@ function filterCompleted() {}
 function clearCompletedTasks() {
     const completedTasks = document.querySelectorAll('li[data-status="completed"]')
 
-    console.log(completedTasks)
+    // console.log(completedTasks)
 
-    // completedTasks.remove()
+    completedTasks.remove()
     countItems()
 }
 
