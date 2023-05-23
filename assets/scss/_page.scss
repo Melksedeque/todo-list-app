@@ -205,17 +205,19 @@ main.page {
 
     &.dark-theme {
         section.new-todo {
-            background: $very_dark_desaturated_blue_tdark;
-            div.mark {
-                label {
-                    border-color: $very_dark_grayish_blue_hover_tdark;
+            form.form-todo {
+                background: $very_dark_desaturated_blue_tdark;
+                div.mark {
+                    label {
+                        border-color: $very_dark_grayish_blue_hover_tdark;
+                    }
                 }
-            }
-            div.label {
-                input {
-                    color: $light_grayish_blue_tdark;
-                    &::placeholder {
-                        color: $dark_grayish_blue_tdark;
+                div.label {
+                    input {
+                        color: $light_grayish_blue_tdark;
+                        &::placeholder {
+                            color: $dark_grayish_blue_tdark;
+                        }
                     }
                 }
             }
