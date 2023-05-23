@@ -1,4 +1,5 @@
 const form = document.getElementById('new-item')
+const alertError = document.querySelector('.error-info')
 const taskList = document.getElementById('task-list')
 const items = JSON.parse(localStorage.getItem('tasks')) || []
 const btnFilterAll = document.querySelector('button[data-filter="all"]')
@@ -49,23 +50,29 @@ items.forEach(e => {
 
 form.addEventListener("submit", (e) => {
     e.preventDefault()
-    
     const inputNewTodo = e.target.elements["input_new_todo"]
     const lastItemId = items.length > 0 ? items[items.length - 1].id : 0
-    const newItem = {
-        "id": lastItemId !== 0 ? lastItemId + 1 : 1,
-        "title": inputNewTodo.value,
-        "status": ""
+    
+    if(!inputNewTodo.value) {
+        alertError.style.display = "block"
     }
+    else {
+        alertError.style.display = "none"
 
-    console.log(newItem)
-    createTodo(newItem)
-    countItems()
-    inputNewTodo.value = ''
-    
-    items.push(newItem)
-    
-    localStorage.setItem("tasks", JSON.stringify(items))
+        const newItem = {
+            "id": lastItemId !== 0 ? lastItemId + 1 : 1,
+            "title": inputNewTodo.value,
+            "status": ""
+        }
+
+        createTodo(newItem)
+        countItems()
+        inputNewTodo.value = ''
+        
+        items.push(newItem)
+        
+        localStorage.setItem("tasks", JSON.stringify(items))
+    }
 })
 
 /**
