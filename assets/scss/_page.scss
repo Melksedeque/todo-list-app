@@ -8,54 +8,60 @@ main.page {
     }
 
     section.new-todo {
-        background: white;
-        border-radius: 7px;
-        height: 60px;
         margin-bottom: 30px;
-        div.mark {
-            background: transparent;
-            padding: 0;
-            width: 13%;
-            label {
+        form.form-todo {
+            background: white;
+            border-radius: 7px;
+            div.mark {
                 background: transparent;
-                border: 1px solid $very_light_grayish_blue_tlight;
-                border-radius: 100px;
-                display: block;
-                height: 24px;
-                margin: 0 20px;
-                transition: all .25s ease;
-                width: 24px;
+                padding: 0;
+                width: 13%;
+                label {
+                    background: transparent;
+                    border: 1px solid $very_light_grayish_blue_tlight;
+                    border-radius: 100px;
+                    display: block;
+                    height: 24px;
+                    margin: 0 20px;
+                    transition: all .25s ease;
+                    width: 24px;
+                }
+            }
+            div.label {
+                width: 87%;
+                input {
+                    background-color: transparent;
+                    border: 0 none;
+                    border-radius: 10px;
+                    color: $very_dark_grayish_blue_tlight;
+                    font: $regular 19px $font;
+                    height: 100%;
+                    margin-top: 2px;
+                    padding: 18px 0;
+                    transition: all .25s ease;
+                    width: 100%;
+                    &::placeholder {
+                        color: $dark_grayish_blue_tlight;
+                    }
+                    &:focus {
+                        box-shadow: none;
+                        outline: none;
+                    }
+                }
             }
         }
-        div.label {
-            width: 87%;
-            input {
-                background-color: transparent;
-                border: 0 none;
-                border-radius: 10px;
-                color: $very_dark_grayish_blue_tlight;
-                font: $regular 19px $font;
-                height: 100%;
-                margin-top: 2px;
-                padding: 18px 0;
-                transition: all .25s ease;
-                width: 100%;
-                &::placeholder {
-                    color: $dark_grayish_blue_tlight;
-                }
-                &:focus {
-                    box-shadow: none;
-                    outline: none;
-                }
-            }
+        div.error-info {
+            background: #F8D7DA;
+            border: 1px solid #F5C6CB;
+            border-radius: 5px;
+            color: #721C24;
+            font: $regular 12px/16px $font;
+            margin: 10px 0;
+            padding: 5px 10px;
         }
     }
 
     section.list-todo {
-        p.error-info {
-            font: $regular 12px/16px $font;
-            margin: -30px 0 60px;
-        }
         ul.list-items {
             background: $very_light_grayish_blue_tlight;
             border-radius: 7px 7px 0 0;
