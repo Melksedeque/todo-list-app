@@ -1,6 +1,46 @@
 const form = document.getElementById('new-item')
 const taskList = document.getElementById('task-list')
 const items = JSON.parse(localStorage.getItem('tasks')) || []
+const btnFilterAll = document.querySelector('button[data-filter="all"]')
+const btnFilterActive = document.querySelector('button[data-filter="active"]')
+const btnFilterCompleted = document.querySelector('button[data-filter="completed"]')
+const btnFilterClear = document.querySelector('button[data-filter="clear"]')
+
+function buildDeleteTaskButton(id) {
+    const btnDeleteTask = document.createElement('button')
+    const svgDeleteTask = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+
+    btnDeleteTask.classList.add('delete')
+    svgDeleteTask.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    svgDeleteTask.setAttribute('width', '18')
+    svgDeleteTask.setAttribute('height', '18')
+    svgDeleteTask.innerHTML = '<path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/>'
+    btnDeleteTask.appendChild(svgDeleteTask)
+
+    btnDeleteTask.addEventListener("click", function() {
+        deleteTodo(this.parentNode, id)
+    })
+
+    return btnDeleteTask
+}
+
+function buildCompleteTaskButton() {
+    const btnCompleteTask = document.createElement('button')
+    const svgCompleteTask = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+
+    btnCompleteTask.classList.add('complete')
+    svgCompleteTask.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    svgCompleteTask.setAttribute('width', '11')
+    svgCompleteTask.setAttribute('height', '9')
+    svgCompleteTask.innerHTML = '<path transform="translate(0, -15.674)" fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/>'
+    btnCompleteTask.appendChild(svgCompleteTask)
+
+    btnCompleteTask.addEventListener("click", function() {
+        completeTodo(this.parentNode)
+    })
+
+    return btnCompleteTask
+}
 
 items.forEach(e => {
     createTodo(e)
@@ -11,12 +51,13 @@ form.addEventListener("submit", (e) => {
     e.preventDefault()
     
     const inputNewTodo = e.target.elements["input_new_todo"]
+    const lastItemId = items.length > 0 ? items[items.length - 1].id : 0
     const newItem = {
-        "id": items.length + 1,
+        "id": lastItemId !== 0 ? lastItemId + 1 : 1,
         "title": inputNewTodo.value
     }
 
-    
+    console.log(newItem)
     createTodo(newItem)
     countItems()
     inputNewTodo.value = ''
@@ -26,55 +67,69 @@ form.addEventListener("submit", (e) => {
     localStorage.setItem("tasks", JSON.stringify(items))
 })
 
-function countItems() {
-    const countElement = document.querySelector('span.count');
-    let items = document.querySelectorAll('li.item:not(.completed)').length;
-    countElement.textContent = items;
-}
-
+/**
+ * "CRUD"
+ */
 function createTodo(task) {
     const newTodo = document.createElement('li')
-    const btnCompleteTask = document.createElement('button')
-    const svgCompleteTask = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
     const taskTitle = document.createElement('span')
-    const btnClearTask = document.createElement('button')
-    const svgClearTask = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
     
     newTodo.classList.add('item')
     newTodo.dataset.id = task.id
-    
-    btnCompleteTask.classList.add('complete')
-    svgCompleteTask.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
-    svgCompleteTask.setAttribute('width', '11')
-    svgCompleteTask.setAttribute('height', '9')
-    svgCompleteTask.innerHTML = '<path transform="translate(0, -15.674)" fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/>'
-    btnCompleteTask.appendChild(svgCompleteTask)
+    newTodo.dataset.status = ""
     
     taskTitle.classList.add('title')
     taskTitle.innerHTML += task.title
     
-    btnClearTask.classList.add('delete')
-    svgClearTask.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
-    svgClearTask.setAttribute('width', '18')
-    svgClearTask.setAttribute('height', '18')
-    svgClearTask.innerHTML = '<path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/>'
-    btnClearTask.appendChild(svgClearTask)
-    
-    newTodo.appendChild(btnCompleteTask)
+    newTodo.appendChild(buildCompleteTaskButton())
     newTodo.appendChild(taskTitle)
-    newTodo.appendChild(btnClearTask)
+    newTodo.appendChild(buildDeleteTaskButton(task.id))
     
     taskList.appendChild(newTodo)
 }
 
+function deleteTodo(task, id) {
+    task.remove()
+    items.splice(items.findIndex(element => element.id === id), 1)
+    localStorage.setItem("tasks", JSON.stringify(items))
+    countItems()
+}
+
+function completeTodo(task) {
+    const status = task.dataset.status
+
+    task.classList.toggle("completed")
+    task.dataset.status = status === "completed" ? "" : "completed"
+
+    countItems()
+}
 
 
+/**
+ * FILTERS
+*/
+btnFilterClear.addEventListener("click", () => {
+    clearCompletedTasks() 
+})
 
+function countItems() {
+    const countElement = document.querySelector('span.count')
+    let items = document.querySelectorAll('li.item:not(.completed)').length
+    countElement.textContent = items
+}
 
+function filterAll() {}
+function filterActive() {}
+function filterCompleted() {}
 
+function clearCompletedTasks() {
+    const completedTasks = document.querySelectorAll('li[data-status="completed"]')
 
+    console.log(completedTasks)
 
-
+    // completedTasks.remove()
+    countItems()
+}
 
 
 
