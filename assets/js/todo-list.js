@@ -136,6 +136,6 @@ function clearCompletedTasks() {
 
     // console.log(completedTasks)
 
-    completedTasks.remove()
+    // completedTasks.remove()
     countItems()
 }
