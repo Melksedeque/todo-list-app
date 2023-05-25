@@ -105,19 +105,19 @@ function deleteTodo(task, id) {
 }
 
 function completeTodo(task, id) {
-    const status = task.dataset.status;
+    const status = task.dataset.status
 
-    task.classList.toggle("completed");
-    task.dataset.status = status === "completed" ? "" : "completed";
+    task.classList.toggle("completed")
+    task.dataset.status = status === "completed" ? "completed" : ""
 
     items.forEach(item => {
         if (item.id === id) {
-            item.status = task.dataset.status;
+            item.status = task.dataset.status
         }
     });
 
-    localStorage.setItem("tasks", JSON.stringify(items));
-    countItems();
+    localStorage.setItem("tasks", JSON.stringify(items))
+    countItems()
 }
 
 
