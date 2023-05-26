@@ -37,7 +37,7 @@ function buildCompleteTaskButton(id) {
     btnCompleteTask.appendChild(svgCompleteTask)
 
     btnCompleteTask.addEventListener("click", function() {
-        completeTodo(this.parentNode, id)
+        completeTodo(this.parentNode, id);
     })
 
     return btnCompleteTask
@@ -62,7 +62,8 @@ form.addEventListener("submit", (e) => {
         const newItem = {
             "id": lastItemId !== 0 ? lastItemId + 1 : 1,
             "title": inputNewTodo.value,
-            "status": ""
+            "status": "",
+            "classList": ""
         }
 
         createTodo(newItem)
@@ -71,7 +72,7 @@ form.addEventListener("submit", (e) => {
         
         items.push(newItem)
         
-        localStorage.setItem("tasks", JSON.stringify(items))
+        saveData()
     }
 })
 
@@ -89,7 +90,7 @@ function createTodo(task) {
     taskTitle.classList.add('title')
     taskTitle.innerHTML += task.title
     
-    newTodo.appendChild(buildCompleteTaskButton())
+    newTodo.appendChild(buildCompleteTaskButton(task.id))
     newTodo.appendChild(taskTitle)
     newTodo.appendChild(buildDeleteTaskButton(task.id))
     
@@ -99,24 +100,25 @@ function createTodo(task) {
 function deleteTodo(task, id) {
     task.remove()
     items.splice(items.findIndex(element => element.id === id), 1)
-    console.log(id)
-    localStorage.setItem("tasks", JSON.stringify(items))
+    saveData()
     countItems()
 }
 
 function completeTodo(task, id) {
+    const classList = task.classList
     const status = task.dataset.status
-
-    task.classList.toggle("completed")
-    task.dataset.status = status === "completed" ? "completed" : ""
-
-    items.forEach(item => {
-        if (item.id === id) {
-            item.status = task.dataset.status
-        }
-    });
-
-    localStorage.setItem("tasks", JSON.stringify(items))
+  
+    if (status === "completed") {
+      classList.remove("completed")
+      task.dataset.status = ""
+      updateTaskStatus(id, "")
+    } else {
+      classList.add("completed")
+      task.dataset.status = "completed"
+      updateTaskStatus(id, "completed")
+    }
+  
+    saveData()
     countItems()
 }
 
@@ -145,4 +147,18 @@ function clearCompletedTasks() {
 
     // completedTasks.remove()
     countItems()
+}
+
+function updateTaskStatus(id, status) {
+    const taskIndex = items.findIndex((task) => task.id === id)
+    console.log(items[taskIndex])
+    if (taskIndex !== -1) {
+      items[taskIndex].status = status
+      items[taskIndex].classList = classList;
+      saveData()
+    }
+}
+
+function saveData(){
+    localStorage.setItem("tasks", JSON.stringify(items))
 }
