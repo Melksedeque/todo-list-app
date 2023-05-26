@@ -37,7 +37,7 @@ function buildCompleteTaskButton(id) {
     btnCompleteTask.appendChild(svgCompleteTask)
 
     btnCompleteTask.addEventListener("click", function() {
-        completeTodo(this.parentNode, id);
+        completeTodo(this.parentNode, id)
     })
 
     return btnCompleteTask
@@ -58,14 +58,13 @@ form.addEventListener("submit", (e) => {
     }
     else {
         alertError.style.display = "none"
-
+        
         const newItem = {
             "id": lastItemId !== 0 ? lastItemId + 1 : 1,
             "title": inputNewTodo.value,
             "status": "",
-            "classList": ""
         }
-
+        
         createTodo(newItem)
         countItems()
         inputNewTodo.value = ''
@@ -78,12 +77,17 @@ form.addEventListener("submit", (e) => {
 
 /**
  * "CRUD"
- */
+*/
 function createTodo(task) {
     const newTodo = document.createElement('li')
     const taskTitle = document.createElement('span')
     
-    newTodo.classList.add('item')
+    if(task.status !== "") {
+        newTodo.classList.add('item', task.status)
+    }
+    else {
+        newTodo.classList.add('item')
+    }
     newTodo.dataset.id = task.id
     newTodo.dataset.status = task.status
     
@@ -151,14 +155,16 @@ function clearCompletedTasks() {
 
 function updateTaskStatus(id, status) {
     const taskIndex = items.findIndex((task) => task.id === id)
-    console.log(items[taskIndex])
     if (taskIndex !== -1) {
-      items[taskIndex].status = status
-      items[taskIndex].classList = classList;
-      saveData()
+        items[taskIndex].status = status
+        saveData()
     }
 }
 
 function saveData(){
     localStorage.setItem("tasks", JSON.stringify(items))
+}
+
+function showTask(){
+    taskList.innerHTML = localStorage.getItem("tasks")
 }
