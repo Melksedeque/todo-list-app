@@ -138,6 +138,12 @@ btnFilterAll.addEventListener("click", function() {
     btnFilterActive.classList.remove('active')
     btnFilterCompleted.classList.remove('active')
     this.classList.add('active')
+
+    listItems = document.querySelectorAll('[data-item]')
+
+    listItems.forEach((item) => {
+        showElement(item)
+    })
 })
 
 btnFilterActive.addEventListener("click", function() {
@@ -186,7 +192,6 @@ function filterCompleted(listItems) {
     listItems.forEach((item) => {
         const itemId = item.dataset.id
         const itemObj = items.find((element) => element.id.toString() === itemId)
-        console.log(itemObj)
 
         if (!itemObj || itemObj.status !== 'completed') {
             hideElement(item)
@@ -199,10 +204,9 @@ function filterCompleted(listItems) {
 function clearCompletedTasks() {
     const completedTasks = document.querySelectorAll('li[data-status="completed"]')
 
-    // console.log(completedTasks)
-
-    // completedTasks.remove()
-    countItems()
+    completedTasks.forEach((task) => {
+        deleteTodo(task, task.dataset.id)
+    })
 }
 
 function updateTaskStatus(id, status) {
