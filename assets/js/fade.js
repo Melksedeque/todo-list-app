@@ -1,13 +1,16 @@
 function showElement(element) {
-  element.style.display = 'flex'
   element.style.opacity = '1'
-  element.style.transition = 'opacity 0.5s'
+  element.style.transition = 'all 0.5s ease'
+
+  setTimeout(function () {
+    element.style.display = 'flex'
+  }, 300)
 }
 
 function hideElement(element) {
   if (element) {
     element.style.opacity = '0'
-    element.style.transition = 'opacity 0.5s'
+    element.style.transition = 'all 0.5s ease'
 
     setTimeout(function () {
       element.style.display = 'none'
