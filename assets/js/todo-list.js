@@ -43,10 +43,12 @@ function buildCompleteTaskButton(id) {
     return btnCompleteTask
 }
 
-items.forEach(e => {
-    createTodo(e)
-    countItems()
-})
+function showTasks() {
+    items.forEach(e => {
+        createTodo(e)
+        countItems()
+    })
+}
 
 form.addEventListener("submit", (e) => {
     e.preventDefault()
@@ -130,6 +132,18 @@ function completeTodo(task, id) {
 /**
  * FILTERS
 */
+btnFilterAll.addEventListener("click", () => {
+    showTasks()
+})
+
+btnFilterActive.addEventListener("click", () => {
+    filterActive()
+})
+
+btnFilterCompleted.addEventListener("click", () => {
+    filterCompleted()
+})
+
 btnFilterClear.addEventListener("click", () => {
     clearCompletedTasks() 
 })
@@ -140,9 +154,11 @@ function countItems() {
     countElement.textContent = items
 }
 
-function filterAll() {}
 function filterActive() {}
-function filterCompleted() {}
+
+function filterCompleted() {
+    
+}
 
 function clearCompletedTasks() {
     const completedTasks = document.querySelectorAll('li[data-status="completed"]')
@@ -165,6 +181,4 @@ function saveData(){
     localStorage.setItem("tasks", JSON.stringify(items))
 }
 
-function showTask(){
-    taskList.innerHTML = localStorage.getItem("tasks")
-}
+showTasks()
