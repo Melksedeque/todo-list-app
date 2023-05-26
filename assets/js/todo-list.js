@@ -6,6 +6,7 @@ const btnFilterAll = document.querySelector('button[data-filter="all"]')
 const btnFilterActive = document.querySelector('button[data-filter="active"]')
 const btnFilterCompleted = document.querySelector('button[data-filter="completed"]')
 const btnFilterClear = document.querySelector('button[data-filter="clear"]')
+let listItems
 
 function buildDeleteTaskButton(id) {
     const btnDeleteTask = document.createElement('button')
@@ -91,6 +92,7 @@ function createTodo(task) {
         newTodo.classList.add('item')
     }
     newTodo.dataset.id = task.id
+    newTodo.dataset.item = "item"
     newTodo.dataset.status = task.status
     
     taskTitle.classList.add('title')
@@ -132,16 +134,24 @@ function completeTodo(task, id) {
 /**
  * FILTERS
 */
-btnFilterAll.addEventListener("click", () => {
-    showTasks()
+btnFilterAll.addEventListener("click", function() {
+    btnFilterActive.classList.remove('active')
+    btnFilterCompleted.classList.remove('active')
+    this.classList.add('active')
 })
 
-btnFilterActive.addEventListener("click", () => {
-    filterActive()
+btnFilterActive.addEventListener("click", function() {
+    btnFilterAll.classList.remove('active')
+    btnFilterCompleted.classList.remove('active')
+    this.classList.add('active')
+    filterActive(listItems)
 })
 
-btnFilterCompleted.addEventListener("click", () => {
-    filterCompleted()
+btnFilterCompleted.addEventListener("click", function() {
+    btnFilterActive.classList.remove('active')
+    btnFilterAll.classList.remove('active')
+    this.classList.add('active')
+    filterCompleted(listItems)
 })
 
 btnFilterClear.addEventListener("click", () => {
@@ -154,10 +164,36 @@ function countItems() {
     countElement.textContent = items
 }
 
-function filterActive() {}
+function filterActive(listItems) {
+    listItems = document.querySelectorAll('[data-item]')
 
-function filterCompleted() {
-    
+    listItems.forEach((item) => {
+        const itemId = item.dataset.id
+        const itemObj = items.find((element) => element.id.toString() === itemId)
+
+        if (!itemObj || itemObj.status === 'completed') {
+            hideElement(item)
+        }
+        else {
+            showElement(item)
+        }
+    })
+}
+
+function filterCompleted(listItems) {
+    listItems = document.querySelectorAll('[data-item]')
+
+    listItems.forEach((item) => {
+        const itemId = item.dataset.id
+        const itemObj = items.find((element) => element.id.toString() === itemId)
+        console.log(itemObj)
+
+        if (!itemObj || itemObj.status !== 'completed') {
+            hideElement(item)
+        } else {
+            showElement(item)
+        }
+    })
 }
 
 function clearCompletedTasks() {
