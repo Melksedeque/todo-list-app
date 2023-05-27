@@ -47,7 +47,6 @@ function buildCompleteTaskButton(id) {
 function showTasks() {
     items.forEach(e => {
         createTodo(e)
-        dragAndDrop()
         countItems()
     })
 }
@@ -76,6 +75,7 @@ form.addEventListener("submit", (e) => {
         items.push(newItem)
         
         saveData()
+        dragAndDrop()
     }
 })
 
