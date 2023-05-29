@@ -208,6 +208,7 @@ function clearCompletedTasks() {
 
     completedTasks.forEach((task) => {
         deleteTodo(task, task.dataset.id)
+        saveData()
     })
 }
 
