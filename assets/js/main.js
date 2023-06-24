@@ -54,7 +54,6 @@ function showTasks() {
 form.addEventListener("submit", (e) => {
     e.preventDefault()
     const inputNewTodo = e.target.elements["input_new_todo"]
-    const lastItemId = items.length > 0 ? items[items.length - 1].id : 0
     
     if(!inputNewTodo.value) {
         alertError.style.display = "block"
@@ -63,7 +62,7 @@ form.addEventListener("submit", (e) => {
         alertError.style.display = "none"
         
         const newItem = {
-            "id": lastItemId !== 0 ? lastItemId + 1 : 1,
+            "id": makeId(6),
             "title": inputNewTodo.value,
             "status": "",
         }
@@ -82,6 +81,18 @@ form.addEventListener("submit", (e) => {
 /**
  * "CRUD"
 */
+function makeId(length) {
+    let result = '';
+    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+
 function createTodo(task) {
     const newTodo = document.createElement('li')
     const taskTitle = document.createElement('span')
