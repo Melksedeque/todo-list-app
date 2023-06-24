@@ -293,6 +293,7 @@ function dragAndDrop() {
                     this.parentNode.insertBefore(dragged, this);
                 }
             }
+            saveData()
         });
     }
 }
