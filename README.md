@@ -60,28 +60,23 @@ Users should be able to:
 
 With this project, I learned how to use the draggable attribute in HTML and JavaScript to reorder the task list. It was so simple to learn that I was surprised to see it working from the start.
 
-The block of code below is what gave me headaches and frankly, I'm still stucked with no idea on how to solve it.
+The function below is what gave me headaches for a couple of weeks. I was struggling to find out how to generate an ID for the task item that wouldn't be rewritten when I reload the page or when I clear the completed tasks.
 
 ```js
-$('input#input_new_todo').on('keyup', function (e) {
-  if (e.key === 'Enter' || e.keyCode === 13) {
-    if(!$(this).val()) {
-      $('main.page').find('div.error-info').fadeIn('fast');
+function generateId(length) {
+    let result = ''
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+    const charsLength = chars.length
+    let i = 0
+    while (i < length) {
+      result += chars.charAt(Math.floor(Math.random() * charsLength))
+      i += 1
     }
-    else {
-      $('main.page').find('div.error-info').fadeOut('fast');
-      $('main.page section.list-todo').find('ul.list-items')
-        .append(
-          '<li class="item"><button class="complete"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="9"><path transform="translate(0, -15.674)" fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg></button><span class="title">' + $(this).val() + '</span><button class="delete"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg></button></li>'
-        );
-    }
-    e.currentTarget.value = "";
-  }
-  countItems();
-});
+    return result
+}
 ```
 
-This part should create a new item in the task list. And it does it. But the item created is not interactive. The delete task button nor the complete task button works. If anyone has any idea on how to solve it, or how to make it in a better way, please, feel free to create an issue to help me out.
+Within the loop, a random character is generated from the character string. The Math.random() function generates a random number between 0 and 1, which is multiplied by charsLength and passed to the Math.floor() function to round to the nearest integer. Then, the corresponding character is added to the result variable using the charAt() function.
 
 ### Continued development
 
