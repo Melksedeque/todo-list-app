@@ -62,7 +62,7 @@ form.addEventListener("submit", (e) => {
         alertError.style.display = "none"
         
         const newItem = {
-            "id": makeId(6),
+            "id": generateId(6),
             "title": inputNewTodo.value,
             "status": "",
         }
@@ -81,16 +81,16 @@ form.addEventListener("submit", (e) => {
 /**
  * "CRUD"
 */
-function makeId(length) {
-    let result = '';
-    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < length) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
+function generateId(length) {
+    let result = ''
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+    const charsLength = chars.length
+    let i = 0
+    while (i < length) {
+      result += chars.charAt(Math.floor(Math.random() * charsLength))
+      i += 1
     }
-    return result;
+    return result
 }
 
 function createTodo(task) {
