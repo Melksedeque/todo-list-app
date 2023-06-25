@@ -33,10 +33,10 @@ Users should be able to:
 
 ### Screenshot
 
-![](./todo-app-light-desktop.png)
-![](./todo-app-light-mobile.png)
-![](./todo-app-dark-desktop.png)
-![](./todo-app-dark-mobile.png)
+![](./screenshots/todo-app-light-desktop.png)
+![](./screenshots/todo-app-light-mobile.png)
+![](./screenshots/todo-app-dark-desktop.png)
+![](./screenshots/todo-app-dark-mobile.png)
 
 
 ### Links
