@@ -1,10 +1,10 @@
 main.page {
     transition: all .25s ease;
     &.light-theme {
-        background: $very_light_gray_tlight url('../../images/bg-desktop-light.jpg') center top/contain no-repeat;
+        background: $very_light_gray_tlight url('../images/bg-desktop-light.jpg') center top/contain no-repeat;
     }
     &.dark-theme {
-        background: $very_dark_blue_tdark url('../../images/bg-desktop-dark.jpg') center top/contain no-repeat;
+        background: $very_dark_blue_tdark url('../images/bg-desktop-dark.jpg') center top/contain no-repeat;
     }
 
     section.new-todo {
@@ -287,10 +287,10 @@ main.page {
 @media screen and (max-width: $mobile) {
     main.page {
         &.light-theme {
-            background: $very_light_gray_tlight url('../../images/bg-mobile-light.jpg') center top/auto no-repeat;
+            background: $very_light_gray_tlight url('../images/bg-mobile-light.jpg') center top/auto no-repeat;
         }
         &.dark-theme {
-            background: $very_dark_blue_tdark url('../../images/bg-mobile-dark.jpg') center top/auto no-repeat;
+            background: $very_dark_blue_tdark url('../images/bg-mobile-dark.jpg') center top/auto no-repeat;
         }
 
         section.new-todo {
